@@ -15,7 +15,3 @@
         <!-- Data table plugin-->
         <script type="text/javascript" src="<?= base_url(); ?>Assets/js/plugins/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="<?= base_url(); ?>Assets/js/plugins/dataTables.bootstrap.min.js"></script>
-        <!-- <script src="<?= base_url(); ?>Assets/js/functions_roles.js"></script> -->
-        <script src="<?= base_url(); ?>Assets/js/functions_usuarios.js"></script>
-    </body>
-</html>

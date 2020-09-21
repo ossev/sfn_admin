@@ -90,6 +90,16 @@ function footerAdmin($data=""){
     require_once($view_footer);
 }
 
+function js_file($data="",string $js){
+    $view_js = "Views/Template/js/$js.php";
+    require_once($view_js);
+}
+
+// function home_js($data=""){
+//     $view_footer = "Views/Template/js/home_js.php";
+//     require_once($view_footer);
+// }
+
 function utf8ize($d) {
     if (is_array($d)) {
         foreach ($d as $k => $v) {

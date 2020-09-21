@@ -34,3 +34,4 @@
 
 
 <?php footerAdmin($data);?>
+<?php js_file($data,'usuarios_js');?>

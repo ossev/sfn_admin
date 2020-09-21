@@ -10,3 +10,4 @@
 
 
 <?php footerAdmin($data);?>
+<?php js_file($data,'home_js');?>
