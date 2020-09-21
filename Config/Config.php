@@ -1,7 +1,7 @@
 <?php
 
 // define("BASE_URL","http://localhost/sfn/");
-const BASE_URL = "http://localhost/sfn_2/";
+const BASE_URL = "http://localhost/sfn_admin/";
 
 //Zona horaria
 date_default_timezone_set("America/Bogota");

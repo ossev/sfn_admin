@@ -18,14 +18,6 @@ class Usuarios extends Controllers{
 
     public function getUsuarios(){
         $arrData = $this->model->selectUsuarios();
-        for ($i=0; $i < count($arrData) ; $i++) { 
-
-            $arrData[$i]['options'] = '<div class="text-center">
-            <button class="btn btn-secondary btn-sm btnPermisosRol" rl="'.$arrData[$i]['id'].'" title="Permisos"><i class="fas fa-key"></i></button>
-            <button class="btn btn-primary btn-sm btnEditRol" rl="'.$arrData[$i]['id'].'" title="Editar"><i class="fas fa-pencil-alt"></i></button>
-            <button class="btn btn-danger btn-sm btnDelRol" rl="'.$arrData[$i]['id'].'" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-            </div>';
-        }
         echo json_encode(utf8ize($arrData),JSON_UNESCAPED_UNICODE);
         die();
     }
