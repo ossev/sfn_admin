@@ -5,7 +5,8 @@ class UsuariosModel extends Mysql{
     public $intIdUsuario;
     public $strNombre;
     public $strTelefono;
-    public $intEmail;
+    public $strEmail;
+    public $strEstado;
 
     public function __construct(){
         parent::__construct();
@@ -18,27 +19,28 @@ class UsuariosModel extends Mysql{
         return $request;
     }
 
-    public function selectUser(int $idrol){
+    public function selectUsuario(int $idUsuario){
         //Buscar User
-        $this->intIdUser = $idrol;
-        $sql = "SELECT * FROM rol WHERE idrol = $this->intIdUser";
+        $this->intIdUsuario = $idUsuario;
+        $sql = "SELECT * FROM usuario WHERE id = $this->intIdUsuario";
         $request = $this->select($sql);
         return $request;
     }
 
-    public function insertUser(string $rol, string $descripcion, int $status){
+    public function insertUsuario(string $nombre, string $telefono, string $email, string $rol, string $estado){
         $return = "";
-        $this->strUser = $rol;
-        $this->strDescripcion = $descripcion;
-        $this->intStatus = $status;
+        $this->strNombre = $nombre;
+        $this->strTelefono = $telefono;
+        $this->strEmail = $email;
+        $this->strRol = $rol;
+        $this->strEstado = $estado;
 
-        $sql = "SELECT * FROM rol WHERE nombrerol = '{$this->strUser}'";
+        $sql = "SELECT * FROM usuario WHERE nombre = '{$this->strNombre}'";
         $request = $this->select_all($sql);
         if(empty($request)){
-            $query_insert = "INSERT INTO rol(nombrerol, descripcion, status) VALUES(?,?,?)";
-            $arrData = array($this->strUser, $this->strDescripcion, $this->intStatus);
+            $query_insert = "INSERT INTO usuario(nombre, telefono, email, rol, estado) VALUES(?,?,?,?,?)";
+            $arrData = array($this->strNombre, $this->strTelefono, $this->strEmail, $this->strRol, $this->strEstado);
             $request_insert = $this->insert($query_insert,$arrData);
-            
             $return = $request_insert;
         }else{
             $return = "exist";

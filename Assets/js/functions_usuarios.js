@@ -56,13 +56,61 @@ document.addEventListener('DOMContentLoaded',function(){
         }
     }
     
-    // creating rows
-
-
-    var tabla_usuario = document.getElementById('tablaUsuarios')
+    // Obtener los datos para crear la tabla de usuarios
     fetch('http://localhost/sfn_admin/Usuarios/getUsuarios')
     .then(response=>response.json())
     .then(data =>printDataUsuarios(data));
 
+
+
+    //Nuevo Usuario
+    var formUsuario = document.querySelector("#formularioUsuario");
+    formUsuario.onsubmit = function(e){
+        e.preventDefault(); // Para evitar qu7eel formulario se recargue por defecto
+
+        var idUsuario = document.querySelector('#idUsuario').value;
+        var nombreUsuario = document.querySelector('#nombreUsuario').value;
+        var telefonoUsuario = document.querySelector('#telefonoUsuario').value;
+        var emailUsuario = document.querySelector('#emailUsuario').value;
+        var rolUsuario = document.querySelector('#rolUsuario').Value;
+        var estadoUsuario = document.querySelector('#estadoUsuario').Value;
+
+        if (nombreUsuario == '' || rolUsuario == '') {
+            swal("Atención", "Todos los campos son obligatorios", "error");
+            return false;
+        }
+        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        var ajaxUrl = base_url+'Usuarios/SetUsuario';
+        var formData = new FormData(formUsuario);
+        
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            if (request.readyState == 4 && request.status == 200) {
+                var objData = JSON.parse(request.responseText);
+
+                if (objData.status){
+
+                    $('#modalFormUsuario').modal("hide");
+                    formUsuario.reset();
+                    swal("Usuario",objData.msg, "success");
+                    tableRoles.api().ajax.reload(function(){
+                        // fntEditRol();
+                        // fntDelRol();
+                        // fntPermisos();
+                    });
+
+                }else{
+
+                    swal("Error", objData.msg, "error");
+
+                }
+
+            }
+
+        }
+    }
+
 });
+
 

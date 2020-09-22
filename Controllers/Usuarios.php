@@ -22,11 +22,11 @@ class Usuarios extends Controllers{
         die();
     }
 
-    public function getRol(int $idrol){
+    public function getUsuario(int $idUsuario){
         
-        $intIdRol = intVal(strClean($idrol));
-        if ($intIdRol > 0) {
-            $arrData = $this->model->selectRol($intIdRol);
+        $intIdUsuario = intVal(strClean($idUsuario));
+        if ($intIdUsuario > 0) {
+            $arrData = $this->model->selectUsuario($intIdUsuario);
             if (empty($arrData)) {
                 $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
             }else {
@@ -37,32 +37,34 @@ class Usuarios extends Controllers{
         die();
     }
 
-    public function setRol(){
+    public function setUsuario(){
 
-        $intIdRol = intVal($_POST['idRol']);
-        $strRol = strClean($_POST['txtNombre']);
-        $strDescripcion = strClean($_POST['txtDescripcion']);
-        $intStatus = intVal($_POST['intStatus']);
+        $intIdUsuario = intVal($_POST['idUsuario']);
+        $strNombre = strClean($_POST['nombreUsuario']);
+        $strTelefono = strClean($_POST['telefonoUsuario']);
+        $strEmail = strClean($_POST['emailUsuario']);
+        $strRol = strClean($_POST['rolUsuario']);
+        $strEstado = strClean($_POST['estadoUsuario']);
 
-        if ($intIdRol == 0) {
-            //Crear
-            $request_rol = $this->model->insertRol($strRol, $strDescripcion, $intStatus);
+        if ($intIdUsuario == 0) {
+            //Crear usuario
+            $request_usuario = $this->model->insertUsuario($strNombre, $strTelefono, $strEmail, $strRol, $strEstado);
             $option = 1;
         } else {
-            //Actualizar
-            $request_rol = $this->model->updateRol($intIdRol, $strRol, $strDescripcion, $intStatus);
+            //Actualizar usuario
+            $request_usuario = $this->model->updateUsuario($intIdUsuario, $strNombre, $strTelefono, $strEmail, $strRol, $strEstado);
             $option = 2;
         }
         
 
-        if ($request_rol > 0) {
+        if ($request_usuario > 0) {
 
             if ($option == 1) {
                 $arrResponse = array('status' => true,'msg' => 'Datos guardados correctamente.');
             } else {
                 $arrResponse = array('status' => true,'msg' => 'Datos actualizados correctamente.');
             }
-        } else if ($request_rol == 'exist'){
+        } else if ($request_usuario == 'exist'){
             $arrResponse = array('status' => false, 'msg' => '¡Atención! El rol ya existe.');
         } else{
             $arrResponse = array('status'=>false, 'msg' => 'No es posible almacenar los datos.');

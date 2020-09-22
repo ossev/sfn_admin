@@ -1,9 +1,11 @@
 <?php 
     headerAdmin($data);
-    // getModal('modalUsuario',$data);
+    getModal('modalUsuario',$data);
 ?>
 <br>
 <div class="container">
+    <!-- Button trigger modal -->
+    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalFormUsuario" href="<?= base_url()?>Usuarios"><i class=" fas fa-plus-circle"></i> NUEVO</a>
     <div class="row">
         <div class="col-md-12">
             <div class="tile">
