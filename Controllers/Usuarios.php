@@ -65,14 +65,30 @@ class Usuarios extends Controllers{
                 $arrResponse = array('status' => true,'msg' => 'Datos actualizados correctamente.');
             }
         } else if ($request_usuario == 'exist'){
-            $arrResponse = array('status' => false, 'msg' => '¡Atención! El rol ya existe.');
+            $arrResponse = array('status' => false, 'msg' => '¡Atención! El usuario ya existe.');
         } else{
             $arrResponse = array('status'=>false, 'msg' => 'No es posible almacenar los datos.');
         }
-        echo json_encode(utf8ize($arrResponse,JSON_UNESCAPED_UNICODE));
+        echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
         die();
     }
 
+
+    public function delUsuario($idUsuario){
+
+        $intIdUsuario = intVal(strClean($idUsuario));
+
+        if ($intIdUsuario > 0) {
+            $req = $this->model->deleteUsuario($intIdUsuario);
+            if ($req == 1) {
+                $arrResponse = array('status' => true, 'msg' => '¡Usuario eliminado con éxito');
+            } else {
+                $arrResponse = array('status' => false, 'msg' => 'Ha ocurrido algún error');
+            }
+            echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+            // return $arrResponse;
+        }
+    }
 }
 
 

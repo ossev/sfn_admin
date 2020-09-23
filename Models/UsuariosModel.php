@@ -48,24 +48,33 @@ class UsuariosModel extends Mysql{
         return $return;
     }
 
-    public function updateUser(int $idrol, string $rol, string $descripcion, int $status){
-        $this->intIdUser = $idrol;
-        $this->strUser = $rol;
-        $this->strDescripcion = $descripcion;
-        $this->intStatus = $status;
+    public function updateUsuario(int $id, string $nombre, string $telefono, string $email, string $rol, string $estado){
+        $this->intId = $id;
+        $this->strNombre = $nombre;
+        $this->strTelefono = $telefono;
+        $this->strEmail = $email;
+        $this->strRol = $rol;
+        $this->estado = $estado;
 
-        $sql = "SELECT * FROM rol WHERE nombrerol = '$this->strUser' and idrol != $this->intIdUser";
+        $sql = "SELECT * FROM usuario WHERE nombre = '$this->strNombre' and id != $this->intId";
         $request = $this->select_all($sql);
 
         if (empty($request)) {
-            $sql = "UPDATE rol SET nombrerol = ?, descripcion = ?, status = ? WHERE idrol = $this->intIdUser";
-            $arrData = array($this->strUser, $this->strDescripcion, $this->intStatus);
+            $sql = "UPDATE usuario SET nombre = ?, telefono = ?, email = ?, rol = ?, estado = ? WHERE id = $this->intId";
+            $arrData = array($this->strNombre, $this->strTelefono, $this->strEmail, $this->strRol, $this->estado);
             $request = $this->update($sql, $arrData);
         } else {
             $request = "exist";
         }
         return $request;
         
+    }
+
+    public function deleteUsuario(int $idUsuario){
+        $this->intId = $idUsuario;
+        $sql = "DELETE FROM usuario WHERE id = $this->intId";
+        $request = $this->delete($sql);
+        return $request;
     }
 
 }

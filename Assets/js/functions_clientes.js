@@ -1,15 +1,15 @@
-var usuario = "";
+var cliente = "";
 
 document.addEventListener('DOMContentLoaded',function(){
 
-    var tbl = document.getElementById('tablaUsuarios');
-    function printDataUsuarios(dataArray){
+    var tbl = document.getElementById('tablaClientes');
+    function printDataClientes(dataArray){
         for (var r = 0; r < dataArray.length; r++) {
             var row = document.createElement("tr");
 
-            //Crear id
+            //Crear nit
             var cell_0 = document.createElement("td");
-            var cellText_0 = document.createTextNode(dataArray[r]['id']);
+            var cellText_0 = document.createTextNode(dataArray[r]['nit']);
             cell_0.appendChild(cellText_0);
             row.appendChild(cell_0);
 
@@ -25,19 +25,7 @@ document.addEventListener('DOMContentLoaded',function(){
             cell_2.appendChild(cellText_2);
             row.appendChild(cell_2);
 
-            //Crear email
-            var cell_3 = document.createElement("td");
-            var cellText_3 = document.createTextNode(dataArray[r]['email']);
-            cell_3.appendChild(cellText_3);
-            row.appendChild(cell_3);
-
-            //Crear rol
-            var cell_4 = document.createElement("td");
-            var cellText_4 = document.createTextNode(dataArray[r]['rol']);
-            cell_4.appendChild(cellText_4);
-            row.appendChild(cell_4);
-
-            //Crear rol
+            //Crear estado
             var cell_5 = document.createElement("td");
             var cellText_5 = document.createTextNode(dataArray[r]['estado']);
             cell_5.appendChild(cellText_5);
@@ -46,8 +34,8 @@ document.addEventListener('DOMContentLoaded',function(){
             //Crear editar
             var cell_6 = document.createElement("td");
             var cellText_6 = document.createTextNode('');
-            usuario = JSON.stringify([dataArray[r]['id'], dataArray[r]['nombre'], dataArray[r]['telefono'], dataArray[r]['email'], dataArray[r]['rol'], dataArray[r]['estado']]);
-            cell_6.setAttribute('onclick','seleccionarUsuario('+ usuario +')');
+            cliente = JSON.stringify([dataArray[r]['id'], dataArray[r]['nombre'], dataArray[r]['nit'], dataArray[r]['digito_verificacion'], dataArray[r]['telefono'], dataArray[r]['email'], dataArray[r]['direccion'], dataArray[r]['estado'], dataArray[r]['observacion']]);
+            cell_6.setAttribute('onclick','seleccionarCliente('+ cliente +')');
             cell_6.appendChild(cellText_6);
             cell_6.innerHTML = '<button class="btn btn-primary btn-sm" title="Editar">EDITAR</button>';
             row.appendChild(cell_6);
@@ -55,45 +43,47 @@ document.addEventListener('DOMContentLoaded',function(){
             //Crear eliminar
             var cell_7 = document.createElement("td");
             var cellText_7 = document.createTextNode('');
-            usuario = JSON.stringify([dataArray[r]['id'], dataArray[r]['nombre'], dataArray[r]['telefono'], dataArray[r]['email'], dataArray[r]['rol'], dataArray[r]['estado']]);
-            cell_7.setAttribute('onclick','eliminarUsuario('+ usuario +')');
+            cliente = JSON.stringify([dataArray[r]['id'], dataArray[r]['nombre'], dataArray[r]['nit'], dataArray[r]['digito_verificacion'], dataArray[r]['telefono'], dataArray[r]['email'], dataArray[r]['direccion'], dataArray[r]['estado'], dataArray[r]['observacion']]);
+            cell_7.setAttribute('onclick','eliminarCliente('+ cliente +')');
             cell_7.appendChild(cellText_7);
-            cell_7.innerHTML = '<button class="btn btn-danger" title="Eliminar"><i class="gg-trash"></i></button>';
+            cell_7.innerHTML = '<button class="btn btn-danger btn-sm m-0" title="Eliminar">ELIMINAR</button>';
             row.appendChild(cell_7);
 
             tbl.appendChild(row); // add the row to the end of the table body
         }
     }
     
-    // Obtener los datos para crear la tabla de usuarios
-    fetch('http://localhost/sfn_admin/Usuarios/getUsuarios')
+    // Obtener los datos para crear la tabla de clientes
+    fetch('http://localhost/sfn_admin/Clientes/getClientes')
     .then(response=>response.json())
-    .then(data =>printDataUsuarios(data));
+    .then(data =>printDataClientes(data));
 
 
 
 });
 
-    //Nuevo Usuario
-    var formUsuario = document.querySelector("#formularioUsuario");
-    formUsuario.onsubmit = function(e){
+    //Nuevo Cliente
+    var formCliente = document.querySelector("#formularioCliente");
+    formCliente.onsubmit = function(e){
 
         e.preventDefault(); // Para evitar que formulario se recargue por defecto
-        var idUsuario = document.querySelector('#idUsuario').value;
-        var nombreUsuario = document.querySelector('#nombreUsuario').value;
-        var telefonoUsuario = document.querySelector('#telefonoUsuario').value;
-        var emailUsuario = document.querySelector('#emailUsuario').value;
-        var rolUsuario = document.querySelector('#rolUsuario').Value;
-        var estadoUsuario = document.querySelector('#estadoUsuario').Value;
 
-        if (nombreUsuario == '' || rolUsuario == '') {
-            swal("Atención", "Todos los campos son obligatorios", "error");
+        document.getElementById("errorNit").innerHTML = '';
+        var nitCliente = document.querySelector('#nitCliente').value;
+
+        var mensajeError = "";
+        
+        //Verificar que el campo de nit esté diligenciado
+        if (isNaN(nitCliente)) {
+            mensajeError += "Nit debe ser número";
+            document.getElementById("errorNit").innerHTML = mensajeError;
             return false;
         }
+
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        var ajaxUrl = base_url+'Usuarios/SetUsuario';
-        var formData = new FormData(formUsuario);
-        
+        var ajaxUrl = base_url+'Clientes/SetCliente';
+        var formData = new FormData(formCliente);
+        console.log(formData);
         request.open("POST",ajaxUrl,true);
         request.send(formData);
         request.onreadystatechange = function(){
@@ -102,8 +92,8 @@ document.addEventListener('DOMContentLoaded',function(){
 
                 if (objData.status){
 
-                    $('#modalFormUsuario').modal("hide");
-                    formUsuario.reset();
+                    $('#modalFormCliente').modal("hide");
+                    formCliente.reset();
                         document.getElementById('modalInfoTitle').innerHTML = 'Informacion';
                         document.getElementById('modalInfoTitle').className = "modal-body text-primary";
                         document.getElementById('bodyModalInfo').innerHTML = objData.msg;
@@ -126,21 +116,21 @@ document.addEventListener('DOMContentLoaded',function(){
         }
     }
 
-    function seleccionarUsuario(usuario){
-        console.log(usuario[5]);
-        document.querySelector('#idUsuario').value = usuario[0];
-        document.querySelector('#nombreUsuario').value = usuario[1];
-        document.querySelector('#telefonoUsuario').value = usuario[2];
-        document.querySelector('#emailUsuario').value = usuario[3];
-        document.querySelector('#rolUsuario').value = usuario[4];
-        document.querySelector('#estadoUsuario').value = usuario[5];
-        $('#modalFormUsuario').modal('show');
+    function seleccionarCliente(cliente){
+        console.log(cliente[5]);
+        document.querySelector('#idCliente').value = cliente[0];
+        document.querySelector('#nombreCliente').value = cliente[1];
+        document.querySelector('#telefonoCliente').value = cliente[2];
+        document.querySelector('#emailCliente').value = cliente[3];
+        document.querySelector('#rolCliente').value = cliente[4];
+        document.querySelector('#estadoCliente').value = cliente[5];
+        $('#modalFormCliente').modal('show');
     }
 
 //Eliminar 
-function eliminarUsuario(id){
+function eliminarCliente(id){
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    var ajaxUrl = base_url+'Usuarios/delUsuario/'+id;
+    var ajaxUrl = base_url+'Clientes/delCliente/'+id;
     request.open("POST",ajaxUrl,true);
     request.send(id);
     request.onreadystatechange = function(){
