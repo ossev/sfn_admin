@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded',function(){
             usuario = JSON.stringify([dataArray[r]['id'], dataArray[r]['nombre'], dataArray[r]['telefono'], dataArray[r]['email'], dataArray[r]['rol'], dataArray[r]['estado']]);
             cell_6.setAttribute('onclick','seleccionarUsuario('+ usuario +')');
             cell_6.appendChild(cellText_6);
-            cell_6.innerHTML = '<button class="btn btn-primary" title="Editar"><i class="gg-pen"></i></button>';
+            cell_6.innerHTML = '<button class="btn btn-primary" title="Editar"><span style="font-size:0.5em">EDITAR</span></button>';
             row.appendChild(cell_6);
 
             //Crear eliminar
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded',function(){
             usuario = JSON.stringify([dataArray[r]['id'], dataArray[r]['nombre'], dataArray[r]['telefono'], dataArray[r]['email'], dataArray[r]['rol'], dataArray[r]['estado']]);
             cell_7.setAttribute('onclick','eliminarUsuario('+ usuario +')');
             cell_7.appendChild(cellText_7);
-            cell_7.innerHTML = '<button class="btn btn-danger" title="Eliminar"><i class="gg-trash"></i></button>';
+            cell_7.innerHTML = '<button class="btn btn-danger" title="Eliminar"><BORRAR</button>';
             row.appendChild(cell_7);
 
             tbl.appendChild(row); // add the row to the end of the table body
