@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded',function(){
             usuario = JSON.stringify([dataArray[r]['id'], dataArray[r]['nombre'], dataArray[r]['telefono'], dataArray[r]['email'], dataArray[r]['rol'], dataArray[r]['estado']]);
             cell_6.setAttribute('onclick','seleccionarUsuario('+ usuario +')');
             cell_6.appendChild(cellText_6);
-            cell_6.innerHTML = '<button class="btn btn-primary btn-sm" title="Editar">EDITAR</button>';
+            cell_6.innerHTML = '<button class="btn btn-primary" title="Editar"><i class="gg-pen"></i></button>';
             row.appendChild(cell_6);
 
             //Crear eliminar

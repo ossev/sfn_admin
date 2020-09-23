@@ -5,10 +5,10 @@
 ?>
 <br>
 <div class="container">
-    <div class="form-group">
+
         <!-- Button trigger modal -->
-        <a type="button" class="btn btn-success" data-toggle="modal" data-target="#modalFormUsuario" href="<?= base_url()?>Usuarios"><span>+</span></a>
-    </div>
+        <a type="button" class="btn btn-primary btn-nuevo" data-toggle="modal" data-target="#modalFormUsuario" href="<?= base_url()?>Usuarios"></a>
+
     <div class="row">
         <div class="col-md-12">
             <div class="tile">
