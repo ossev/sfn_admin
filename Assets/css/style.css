@@ -1,4 +1,11 @@
-.btn-nuevo{
+.btn-home{
+    background-image:url(../images/icons/home.svg);
+    background-size: 100%;
+    width: 2em;
+    height: 2em;
+}
+
+.btn-add{
     background-image:url(../images/icons/add.svg);
     background-size: 100%;
     width: 2em;

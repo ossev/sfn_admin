@@ -7,8 +7,9 @@
 <div class="container">
 
         <!-- Button trigger modal -->
+        <a type="button" class="btn btn-primary btn-add" data-toggle="modal" data-target="#modalFormUsuario" href="<?= base_url()?>Usuarios"></a>
+        <a type="button" class="btn btn-primary btn-home" data-toggle="modal" data-target="#modalFormUsuario" href="<?= base_url()?>Usuarios"></a>
         <a type="button" class="btn btn-primary btn-nuevo" data-toggle="modal" data-target="#modalFormUsuario" href="<?= base_url()?>Usuarios"></a>
-
     <div class="row">
         <div class="col-md-12">
             <div class="tile">
