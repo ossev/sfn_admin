@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',function(){
             cliente = JSON.stringify([dataArray[r]['id'], dataArray[r]['nombre'], dataArray[r]['nit'], dataArray[r]['digito_verificacion'], dataArray[r]['telefono'], dataArray[r]['email'], dataArray[r]['direccion'], dataArray[r]['estado'], dataArray[r]['observacion']]);
             cell_6.setAttribute('onclick','seleccionarCliente('+ cliente +')');
             cell_6.appendChild(cellText_6);
-            cell_6.innerHTML = '<button class="btn btn-primary btn-sm m-0" title="Editar">EDITAR</button>';
+            cell_6.innerHTML = '<button class="btn btn-primary btn-sm">EDITAR</button>';
             row.appendChild(cell_6);
 
             //Crear eliminar
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded',function(){
             cliente = JSON.stringify([dataArray[r]['id'], dataArray[r]['nombre'], dataArray[r]['nit'], dataArray[r]['digito_verificacion'], dataArray[r]['telefono'], dataArray[r]['email'], dataArray[r]['direccion'], dataArray[r]['estado'], dataArray[r]['observacion']]);
             cell_7.setAttribute('onclick','eliminarCliente('+ cliente +')');
             cell_7.appendChild(cellText_7);
-            cell_7.innerHTML = '<button class="btn btn-danger btn-sm m-0" title="Eliminar">BORRAR</button>';
+            cell_7.innerHTML = '<button class="btn btn-danger btn-sm">BORRAR</button>';
             row.appendChild(cell_7);
 
             tbl.appendChild(row); // add the row to the end of the table body

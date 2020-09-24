@@ -5,13 +5,12 @@
 ?>
 <br>
 <div class="container">
-        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalFormUsuario" href="<?= base_url()?>Usuarios">+Nuevo</a>
+        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalFormUsuario" href="<?= base_url()?>Usuarios">Nuevo</a>
     <div class="row">
         <div class="col-md-12">
-            <div class="tile">
             <div class="tile-body">
                 <div class="table-responsive">
-                    <table class="table table-hover table-bordered" id="tablaUsuarios">
+                    <table class="table" id="tablaUsuarios">
                         <thead>
                             <tr>
                                 <th class="text-center">Id</th>
@@ -27,7 +26,6 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
             </div>
         </div>
     </div>
