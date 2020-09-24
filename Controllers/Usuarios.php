@@ -42,7 +42,7 @@ class Usuarios extends Controllers{
         $intIdUsuario = intVal($_POST['idUsuario']);
         $strNombre = strClean($_POST['nombreUsuario']);
         $strTelefono = strClean($_POST['telefonoUsuario']);
-        $strEmail = strClean($_POST['emailUsuario']);
+        $strEmail = $_POST['emailUsuario'];
         $strRol = strClean($_POST['rolUsuario']);
         $strEstado = strClean($_POST['estadoUsuario']);
 

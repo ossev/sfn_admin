@@ -64,7 +64,7 @@ class ClientesModel extends Mysql{
         $this->strTelefono = $telefono;
         $this->strEmail = $email;
         $this->strDireccion = $direccion;
-        $this->estado = $estado;
+        $this->strEstado = $estado;
         $this->strObservaciones = $observaciones;
 
         $sql = "SELECT * FROM cliente WHERE nit = '$this->intNit' and id != $this->intId";
@@ -72,7 +72,7 @@ class ClientesModel extends Mysql{
 
         if (empty($request)) {
             $sql = "UPDATE cliente SET nombre = ?, nit = ?, digito_verificacion = ?, telefono = ?, email = ?, direccion = ?, estado = ?, observaciones = ? WHERE id = $this->intId";
-            $arrData = array($this->strNombre, $this->intNit, $this->intDigVer, $this->strTelefono, $this->strEmail, $this->strDireccion, $this->estado, $this->observaciones);
+            $arrData = array($this->strNombre, $this->intNit, $this->intDigVer, $this->strTelefono, $this->strEmail, $this->strDireccion, $this->strEstado, $this->strObservaciones);
             $request = $this->update($sql, $arrData);
         } else {
             $request = "exist";

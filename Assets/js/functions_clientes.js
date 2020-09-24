@@ -34,19 +34,19 @@ document.addEventListener('DOMContentLoaded',function(){
             //Crear editar
             var cell_6 = document.createElement("td");
             var cellText_6 = document.createTextNode('');
-            cliente = JSON.stringify([dataArray[r]['id'], dataArray[r]['nombre'], dataArray[r]['nit'], dataArray[r]['digito_verificacion'], dataArray[r]['telefono'], dataArray[r]['email'], dataArray[r]['direccion'], dataArray[r]['estado'], dataArray[r]['observacion']]);
+            cliente = JSON.stringify([dataArray[r]['id'], dataArray[r]['nombre'], dataArray[r]['nit'], dataArray[r]['digito_verificacion'], dataArray[r]['telefono'], dataArray[r]['email'], dataArray[r]['direccion'], dataArray[r]['estado'], dataArray[r]['observaciones']]);
             cell_6.setAttribute('onclick','seleccionarCliente('+ cliente +')');
             cell_6.appendChild(cellText_6);
-            cell_6.innerHTML = '<button class="btn btn-primary btn-sm">EDITAR</button>';
+            cell_6.innerHTML =  '<button class="btn btn-primary btn-sm"><i class="icon-pencil"></i></button>';
             row.appendChild(cell_6);
 
             //Crear eliminar
             var cell_7 = document.createElement("td");
             var cellText_7 = document.createTextNode('');
-            cliente = JSON.stringify([dataArray[r]['id'], dataArray[r]['nombre'], dataArray[r]['nit'], dataArray[r]['digito_verificacion'], dataArray[r]['telefono'], dataArray[r]['email'], dataArray[r]['direccion'], dataArray[r]['estado'], dataArray[r]['observacion']]);
+            cliente = JSON.stringify([dataArray[r]['id'], dataArray[r]['nombre'], dataArray[r]['nit'], dataArray[r]['digito_verificacion'], dataArray[r]['telefono'], dataArray[r]['email'], dataArray[r]['direccion'], dataArray[r]['estado'], dataArray[r]['observaciones']]);
             cell_7.setAttribute('onclick','eliminarCliente('+ cliente +')');
             cell_7.appendChild(cellText_7);
-            cell_7.innerHTML = '<button class="btn btn-danger btn-sm">BORRAR</button>';
+            cell_7.innerHTML = '<button class="btn btn-danger btn-sm"><i class="icon-bin2"></i></button>';
             row.appendChild(cell_7);
 
             tbl.appendChild(row); // add the row to the end of the table body
@@ -57,8 +57,6 @@ document.addEventListener('DOMContentLoaded',function(){
     fetch('http://localhost/sfn_admin/Clientes/getClientes')
     .then(response=>response.json())
     .then(data =>printDataClientes(data));
-
-
 
 });
 
@@ -117,13 +115,15 @@ document.addEventListener('DOMContentLoaded',function(){
     }
 
     function seleccionarCliente(cliente){
-        console.log(cliente[5]);
         document.querySelector('#idCliente').value = cliente[0];
         document.querySelector('#nombreCliente').value = cliente[1];
-        document.querySelector('#telefonoCliente').value = cliente[2];
-        document.querySelector('#emailCliente').value = cliente[3];
-        document.querySelector('#rolCliente').value = cliente[4];
-        document.querySelector('#estadoCliente').value = cliente[5];
+        document.querySelector('#nitCliente').value = cliente[2];
+        document.querySelector('#digVerCliente').value = cliente[3];
+        document.querySelector('#telefonoCliente').value = cliente[4];
+        document.querySelector('#emailCliente').value = cliente[5];
+        document.querySelector('#direccionCliente').value = cliente[6];
+        document.querySelector('#estadoCliente').value = cliente[7];
+        document.querySelector('#observacionCliente').value = cliente[8];
         $('#modalFormCliente').modal('show');
     }
 

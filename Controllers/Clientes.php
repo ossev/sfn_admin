@@ -44,7 +44,7 @@ class Clientes extends Controllers{
         $intNit = intVal($_POST['nitCliente']);
         $intDigVer= intVal($_POST['digVerCliente']);
         $strTelefono = strClean($_POST['telefonoCliente']);
-        $strEmail = strClean($_POST['emailCliente']);
+        $strEmail = $_POST['emailCliente'];
         $strDireccion = strClean($_POST['direccionCliente']);
         $strEstado = strClean($_POST['estadoCliente']);
         $strObservacion = strClean($_POST['observacionCliente']);
@@ -58,7 +58,6 @@ class Clientes extends Controllers{
             $request_cliente = $this->model->updateCliente($intId, $strNombre, $intNit, $intDigVer, $strTelefono, $strEmail, $strDireccion, $strEstado, $strObservacion);
             $option = 2;
         }
-        
 
         if ($request_cliente > 0) {
 

@@ -20,7 +20,10 @@ function getModal(string $nameModal, $data){
 
 //Funcion para limpiar una cadena
 function strClean($strCadena){
-    $string = preg_replace(['/\s*/','/^\s|\s$/'],['',''],$strCadena);
+    // $string = preg_replace(['/\s*/','/^\s|\s$/'],['',''],$strCadena);
+    // $string = preg_replace('/\s\s+/', ' ', $strCadena);
+    // $string = preg_replace('([^A-Za-z0-9])', ' ', $strCadena);
+    $string = preg_replace('/[^a-zA-Z0-9_ -]/s', '', $strCadena);
     $string = trim($string);
     $string = stripslashes($string);
     $string = str_ireplace("<script>","",$string);
