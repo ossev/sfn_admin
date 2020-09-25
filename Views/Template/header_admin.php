@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>Assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>Assets/css/style.css">
     </head>
-    <body class="app sidebar-mini">
+    <body>
         <!-- Navbar-->
     <header>
 

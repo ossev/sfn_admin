@@ -5,7 +5,7 @@
         <script src="<?= base_url(); ?>Assets/js/jquery-3.5.1.min.js"></script>
         <script src="<?= base_url(); ?>Assets/js/popper.min.js"></script>
         <script src="<?= base_url(); ?>Assets/js/bootstrap.min.js"></script>
-        <script src="<?= base_url(); ?>Assets/js/functions_admin.js"></script>
+        <script src="<?= base_url(); ?>Assets/js/main.js"></script>
         <!-- The javascript plugin to display page loading on top-->
 
     </body>

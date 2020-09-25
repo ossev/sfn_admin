@@ -52,6 +52,15 @@ document.addEventListener('DOMContentLoaded',function(){
             cell_6.innerHTML = '<button class="btn btn-primary btn-sm"><i class="icon-pencil"></i></button>';
             row.appendChild(cell_6);
 
+            //Crear asignar contraseña
+            var cell_6 = document.createElement("td");
+            var cellText_6 = document.createTextNode('');
+            usuario = JSON.stringify([dataArray[r]['id']]);
+            cell_6.setAttribute('onclick','seleccionarUsuario('+ usuario +')');
+            cell_6.appendChild(cellText_6);
+            cell_6.innerHTML = '<button class="btn btn-primary btn-sm"><i class="icon-pencil"></i></button>';
+            row.appendChild(cell_6);
+
             //Crear eliminar
             var cell_7 = document.createElement("td");
             var cellText_7 = document.createTextNode('');
@@ -79,15 +88,12 @@ document.addEventListener('DOMContentLoaded',function(){
     formUsuario.onsubmit = function(e){
 
         e.preventDefault(); // Para evitar que formulario se recargue por defecto
-        var idUsuario = document.querySelector('#idUsuario').value;
         var nombreUsuario = document.querySelector('#nombreUsuario').value;
-        var telefonoUsuario = document.querySelector('#telefonoUsuario').value;
-        var emailUsuario = document.querySelector('#emailUsuario').value;
         var rolUsuario = document.querySelector('#rolUsuario').Value;
-        var estadoUsuario = document.querySelector('#estadoUsuario').Value;
+
 
         if (nombreUsuario == '' || rolUsuario == '') {
-            swal("Atención", "Todos los campos son obligatorios", "error");
+            modalinfo("Todos los campos son obligatorios", "error");
             return false;
         }
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -132,8 +138,8 @@ document.addEventListener('DOMContentLoaded',function(){
         document.querySelector('#nombreUsuario').value = usuario[1];
         document.querySelector('#telefonoUsuario').value = usuario[2];
         document.querySelector('#emailUsuario').value = usuario[3];
-        document.querySelector('#rolUsuario').value = usuario[4];
-        document.querySelector('#estadoUsuario').value = usuario[5];
+        document.querySelector('#rolUsuario').value = usuario[5];
+        document.querySelector('#estadoUsuario').value = usuario[6];
         $('#modalFormUsuario').modal('show');
     }
 
