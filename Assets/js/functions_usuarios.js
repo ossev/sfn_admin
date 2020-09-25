@@ -56,9 +56,9 @@ document.addEventListener('DOMContentLoaded',function(){
             var cell_6 = document.createElement("td");
             var cellText_6 = document.createTextNode('');
             usuario = JSON.stringify([dataArray[r]['id']]);
-            cell_6.setAttribute('onclick','seleccionarUsuario('+ usuario +')');
+            cell_6.setAttribute('onclick','asignarContrasena('+ usuario +')');
             cell_6.appendChild(cellText_6);
-            cell_6.innerHTML = '<button class="btn btn-primary btn-sm"><i class="icon-pencil"></i></button>';
+            cell_6.innerHTML = '<button class="btn btn-primary btn-sm"><i class="icon-key"></i></button>';
             row.appendChild(cell_6);
 
             //Crear eliminar
