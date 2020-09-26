@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded',function(){
             //Crear asignar contraseña
             var cell_6 = document.createElement("td");
             var cellText_6 = document.createTextNode('');
-            usuario = JSON.stringify([dataArray[r]['id']]);
-            cell_6.setAttribute('onclick','asignarContrasena('+ usuario +')');
+            usuario = JSON.stringify([dataArray[r]['id'], dataArray[r]['nombre'], dataArray[r]['email']]);
+            cell_6.setAttribute('onclick','seleccionarUsuarioParaPW('+ usuario +')');
             cell_6.appendChild(cellText_6);
             cell_6.innerHTML = '<button class="btn btn-primary btn-sm"><i class="icon-key"></i></button>';
             row.appendChild(cell_6);
@@ -79,8 +79,6 @@ document.addEventListener('DOMContentLoaded',function(){
     .then(response=>response.json())
     .then(data =>printDataUsuarios(data));
 
-
-
 });
 
     //Nuevo Usuario
@@ -91,11 +89,11 @@ document.addEventListener('DOMContentLoaded',function(){
         var nombreUsuario = document.querySelector('#nombreUsuario').value;
         var rolUsuario = document.querySelector('#rolUsuario').Value;
 
-
         if (nombreUsuario == '' || rolUsuario == '') {
             modalinfo("Todos los campos son obligatorios", "error");
             return false;
         }
+
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         var ajaxUrl = base_url+'Usuarios/SetUsuario';
         var formData = new FormData(formUsuario);
@@ -132,18 +130,18 @@ document.addEventListener('DOMContentLoaded',function(){
         }
     }
 
-    function seleccionarUsuario(usuario){
-        console.log(usuario[5]);
-        document.querySelector('#idUsuario').value = usuario[0];
-        document.querySelector('#nombreUsuario').value = usuario[1];
-        document.querySelector('#telefonoUsuario').value = usuario[2];
-        document.querySelector('#emailUsuario').value = usuario[3];
-        document.querySelector('#rolUsuario').value = usuario[5];
-        document.querySelector('#estadoUsuario').value = usuario[6];
-        $('#modalFormUsuario').modal('show');
-    }
+// Seleccionar usuario para realizar edición
+function seleccionarUsuario(usuario){
+    document.querySelector('#idUsuario').value = usuario[0];
+    document.querySelector('#nombreUsuario').value = usuario[1];
+    document.querySelector('#telefonoUsuario').value = usuario[2];
+    document.querySelector('#emailUsuario').value = usuario[3];
+    document.querySelector('#rolUsuario').value = usuario[4];
+    document.querySelector('#estadoUsuario').value = usuario[5];
+    $('#modalFormUsuario').modal('show');
+}
 
-//Eliminar 
+// Eliminar usuario
 function eliminarUsuario(id){
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     var ajaxUrl = base_url+'Usuarios/delUsuario/'+id;
@@ -173,3 +171,66 @@ function eliminarUsuario(id){
     }
 }
 
+// Seleccionar usuario para asignar o cambiar contrasena
+function seleccionarUsuarioParaPW(usuario){
+    document.querySelector('#idUsuarioContrasena').value = usuario[0];
+    document.querySelector('#nombreUsuarioContrasena').innerHTML = usuario[1];
+    document.querySelector('#emailUsuarioContrasena').innerHTML = usuario[2];
+    $('#modalFormUsuarioContrasena').modal('show');
+}
+
+// Evento para limpiar la cadena de caracteres de la contraseña en el mismo momento en que ésta está
+// siendo diligenciada
+$(document).on('keyup', '#contrasenaUsuario', function() {
+    var contrasena = document.querySelector('#contrasenaUsuario').value;
+    document.querySelector('#contrasenaUsuario').value = limpiarCadena(contrasena);
+});
+
+// Crear contraseña
+
+    var formUsuarioPW = document.querySelector("#formularioUsuarioContrasena");;
+    formUsuarioPW.onsubmit = function(e){
+
+        e.preventDefault(); // Para evitar que formulario se recargue por defecto
+        var contrasenaUsuario = document.querySelector('#contrasenaUsuario').value;
+        if (contrasenaUsuario == "") {
+            document.querySelector('#avisoUsuario').innerHTML = "Debe ingresar una contraseña";
+            document.querySelector('#avisoUsuario').classList.add("icon-warning");
+            return false;
+        }
+
+        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        var ajaxUrl = base_url+'Usuarios/SetUsuario';
+        var formData = new FormData(formUsuarioPW);
+        
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){
+            if (request.readyState == 4 && request.status == 200) {
+                var objData = JSON.parse(request.responseText);
+
+                if (objData.status){
+
+                    $('#modalFormUsuario').modal("hide");
+                    formUsuarioPW.reset();
+                        document.getElementById('modalInfoTitle').innerHTML = 'Informacion';
+                        document.getElementById('modalInfoTitle').className = "modal-body text-primary";
+                        document.getElementById('bodyModalInfo').innerHTML = objData.msg;
+                        document.getElementById('bodyModalInfo').className = "text-primary";
+                    $('#modalInfo').modal('show');
+                    $('#modalInfo').on('hidden.bs.modal', function (e) {
+                        location.reload();
+                    })
+
+                }else{
+                    document.getElementById('modalInfoTitle').innerHTML = 'Error';
+                    document.getElementById('modalInfoTitle').className = "modal-body text-danger";
+                    document.getElementById('bodyModalInfo').innerHTML = objData.msg;
+                    document.getElementById('bodyModalInfo').className = "text-danger";
+                    $('#modalInfo').modal('show');
+                }
+
+            }
+
+        }
+    }

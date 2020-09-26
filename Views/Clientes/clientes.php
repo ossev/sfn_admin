@@ -9,6 +9,7 @@
     <div class="container">
         <a type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalFormCliente" href="<?= base_url()?>Clientes"><i class="icon-plus"></i> NUEVO</a>
     </div>
+    <br>
     <table class="table table-hover" id="tablaClientes">
         <thead>
             <tr>

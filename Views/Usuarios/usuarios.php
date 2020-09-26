@@ -2,6 +2,7 @@
     headerAdmin($data);
     getModal('modalUsuario',$data);
     getModal('modalInfo',$data);
+    getModal('modalUsuarioContrasena',$data);
 ?>
 <br>
 <div class="container">
@@ -27,7 +28,6 @@
         </table>
     </div>
 </div>
-
 
 <?php footerAdmin($data);?>
 <?php js_file($data,'usuarios_js');?>
