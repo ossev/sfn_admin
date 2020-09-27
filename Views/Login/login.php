@@ -28,7 +28,7 @@
 
                 <div class="form-group">
                     <label for="usuario">Email address</label>
-                    <input type="text" class="form-control" id="usuario" name="usuario">
+                    <input type="email" class="form-control" id="email" name="email">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>

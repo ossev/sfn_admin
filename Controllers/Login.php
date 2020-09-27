@@ -18,16 +18,28 @@ class Login extends Controllers{
 
     public function loginUser(){
         if ($_POST) {
-            if (empty($_POST['usuario']=="" || empty($_POST['password']))) {
+            if (empty($_POST['email'] || empty($_POST['password']))) {
                 $arrResponse = array('status' => false, 'msg' => 'No todos los campos se han diligenciado');
             }else{
-                $strUsuario = strtolower(strClean($_POST['usuario']));
-                $strPassword = $_POST['password'];
-                $requestUser = $this->model->loginUser($strUsuario, $strPassword);
+                $strEmail = $_POST['email'];
+                $strContrasena = strClean($_POST['password']);
+                $request = $this->model->getPassWord($strEmail);
+                if ($request) {
+                    if (password_verify($strContrasena, $request['password'])) {
+                        $arrResponse = array('status' => true, 'msg' => 'Usuario logueado');
+                    }else{
+                        $arrResponse = array('status' => false, 'msg' => 'Contraseña o email incorrecto!');
+                    }
+                    
+                } else {
+                    $arrResponse = array('status' => false, 'msg' => 'Contraseña o email incorrecto!');
+                }
+                echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             }
             die();
         }
     }
+
 }
 
 ?>

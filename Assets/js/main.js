@@ -1,5 +1,5 @@
 function modalInfo(mensaje, tipoMensaje){
-    if (tipoMensaje="error") {
+    if (tipoMensaje=="error") {
         document.getElementById('modalInfoTitle').innerHTML = 'Error';
         document.getElementById('modalInfoTitle').className = "modal-body text-danger";
         document.getElementById('bodyModalInfo').innerHTML = mensaje;

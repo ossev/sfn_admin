@@ -86,6 +86,7 @@ class UsuariosModel extends Mysql{
         return $request;
         //Se debe usar >> password_verify($pass, $passHash) << para verificar la contraseña
     }
+
 }
 
 ?>

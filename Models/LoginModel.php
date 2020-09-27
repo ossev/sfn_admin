@@ -2,23 +2,20 @@
 
 class LoginModel extends Mysql{
 
-    private $intIdUsuario;
-    private $strUsuario;
-    private $strPassword;
-    private $strToken;
+    private $strEmail;
+    private $strContrasena;
 
     public function __construct(){
         parent::__construct();
     }
 
-    public function loginUser(string $usuario, string $password){
-        $this->strUsuario = $usuario;
-        $this->strPassword = $password;
-        $sql = "SELECT id, estado FROM usuario WHERE
-                usuario = '$this->strUsuario' and
-                password = '$this->strPassword' and
-                estado != inactivo";
+    public function getPassWord(string $email){
+        $this->strEmail = $email;
+        $sql = "SELECT * FROM usuario WHERE email = '$this->strEmail'";
+        $arrData = array($this->strEmail);
+        $request = $this->select($sql, $arrData);
         return $request;
+        //Se debe usar >> password_verify($pass, $passHash) << para verificar la contraseña
     }
 
 }
