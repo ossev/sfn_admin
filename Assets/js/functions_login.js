@@ -14,35 +14,34 @@ document.addEventListener('DOMContentLoaded',function () {
                 var formData = new FormData(formLogin);
                 request.open("POST",ajaxUrl,true);
                 request.send(formData);
-                console.log(request);
-                // request.onreadystatechange = function(){
-                //     if (request.readyState == 4 && request.status == 200) {
-                //         var objData = JSON.parse(request.responseText);
+                
+                request.onreadystatechange = function(){
+                    if (request.readyState == 4 && request.status == 200) {
+                        var objData = JSON.parse(request.responseText);
         
-                //         if (objData.status){
+                        if (objData.status){
+                            // $('#modalFormCliente').modal("hide");
+                            // formLogin.reset();
+                            //     document.getElementById('modalInfoTitle').innerHTML = 'Informacion';
+                            //     document.getElementById('modalInfoTitle').className = "modal-body text-primary";
+                            //     document.getElementById('bodyModalInfo').innerHTML = objData.msg;
+                            //     document.getElementById('bodyModalInfo').className = "text-primary";
+                            // $('#modalInfo').modal('show');
+                            // $('#modalInfo').on('hidden.bs.modal', function (e) {
+                            //     location.reload();
+                            // })
         
-                //             $('#modalFormCliente').modal("hide");
-                //             formLogin.reset();
-                //                 document.getElementById('modalInfoTitle').innerHTML = 'Informacion';
-                //                 document.getElementById('modalInfoTitle').className = "modal-body text-primary";
-                //                 document.getElementById('bodyModalInfo').innerHTML = objData.msg;
-                //                 document.getElementById('bodyModalInfo').className = "text-primary";
-                //             $('#modalInfo').modal('show');
-                //             $('#modalInfo').on('hidden.bs.modal', function (e) {
-                //                 location.reload();
-                //             })
+                        }else{
+                            // document.getElementById('modalInfoTitle').innerHTML = 'Error';
+                            // document.getElementById('modalInfoTitle').className = "modal-body text-danger";
+                            // document.getElementById('bodyModalInfo').innerHTML = objData.msg;
+                            // document.getElementById('bodyModalInfo').className = "text-danger";
+                            // $('#modalInfo').modal('show');
+                        }
         
-                //         }else{
-                //             document.getElementById('modalInfoTitle').innerHTML = 'Error';
-                //             document.getElementById('modalInfoTitle').className = "modal-body text-danger";
-                //             document.getElementById('bodyModalInfo').innerHTML = objData.msg;
-                //             document.getElementById('bodyModalInfo').className = "text-danger";
-                //             $('#modalInfo').modal('show');
-                //         }
+                    }
         
-                //     }
-        
-                // }
+                }
             }
         }
     }

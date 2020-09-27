@@ -90,6 +90,20 @@ class Usuarios extends Controllers{
         }
     }
 
+    public function setContrasena(){
+
+        $intIdUsuario = intVal(strClean($_POST['idUsuarioContrasena']));
+        $strContrasena = strClean($_POST['contrasenaUsuario']);
+        $request_contrasena = $this->model->setContrasena($intIdUsuario, $strContrasena);
+        if ($request_contrasena=1) {
+            $arrResponse = array('status' => true, 'msg' => '¡Contraseña asignada con éxito');
+        } else {
+            $arrResponse = array('status' => false, 'msg' => 'Ha ocurrido algún error');
+        }
+        echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+    }
+
+
 }
 
 

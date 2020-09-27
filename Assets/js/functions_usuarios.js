@@ -200,7 +200,7 @@ $(document).on('keyup', '#contrasenaUsuario', function() {
         }
 
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        var ajaxUrl = base_url+'Usuarios/SetUsuario';
+        var ajaxUrl = base_url+'Usuarios/SetContrasena';
         var formData = new FormData(formUsuarioPW);
         
         request.open("POST",ajaxUrl,true);

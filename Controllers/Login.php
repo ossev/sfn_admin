@@ -22,7 +22,7 @@ class Login extends Controllers{
                 $arrResponse = array('status' => false, 'msg' => 'No todos los campos se han diligenciado');
             }else{
                 $strUsuario = strtolower(strClean($_POST['usuario']));
-                $strPassword = hash("SHA256",$_POST['password']);
+                $strPassword = $_POST['password'];
                 $requestUser = $this->model->loginUser($strUsuario, $strPassword);
             }
             die();

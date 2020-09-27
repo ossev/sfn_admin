@@ -77,6 +77,15 @@ class UsuariosModel extends Mysql{
         return $request;
     }
 
+    public function setContrasena(int $id, string $contrasena){
+        $this->intId = $id;
+        $this->strContrasena = password_hash($contrasena, PASSWORD_BCRYPT);
+        $sql = "UPDATE usuario SET password = ? WHERE id = $this->intId";
+        $arrData = array($this->strContrasena);
+        $request = $this->update($sql, $arrData);
+        return $request;
+        //Se debe usar >> password_verify($pass, $passHash) << para verificar la contraseña
+    }
 }
 
 ?>
